@@ -2,7 +2,15 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     
-    let immagini = ["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg"];
+    let immagini = [
+        {src: "img/01.jpg", title: "Img1", text: "Descrizione 1"},
+        {src: "img/02.jpg", title: "Img 2", text: "Descrizione 2"},
+        {src: "img/03.jpg", title: "Img 3", text: "Descrizione 3"},
+        {src: "img/04.jpg", title: "Img 4", text: "Descrizione 4"},
+        {src: "img/05.jpg", title: "Img 5", text: "Descrizione 5"}
+    ];
+
+
     let indiceCorrente = 0;
     let intervalloTempo = 3000; // Intervallo di tempo in millisecondi (3 secondi)
 
@@ -24,7 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function mostraImmagineCorrente() {
         items.forEach(function (item, index) {
-            item.style.display = index === indiceCorrente ? 'block' : 'none';
+            if (index === indiceCorrente) {
+                item.style.display = 'block';
+                item.innerHTML = `
+                    <img src="${immagini[indiceCorrente].src}" alt="${immagini[indiceCorrente].title}">
+                    <div class="caption">
+                        <h3>${immagini[indiceCorrente].title}</h3>
+                        <p>${immagini[indiceCorrente].text}</p>
+                    </div>
+                `;
+            } else {
+                item.style.display = 'none';
+            }
         });
     }
 
